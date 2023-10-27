@@ -1,55 +1,10 @@
 <form
-  class="container p-5"
-  [formGroup]="flightForm"
-  (ngSubmit)="$event.preventDefault(); submitForm()"
+  class="container p-3"
+  [formGroup]="getFlightForm"
+  (ngSubmit)="$event.preventDefault(); getFlightsForm()"
 >
-  <div class="mb-3">
-    <label class="form-label">Your first name</label>
-    <input
-      type="text"
-      class="form-control"
-      formControlName="firstName"
-    >
-    <div *ngIf="flightForm.get('firstName')?.invalid && (flightForm.get('firstName')?.dirty || flightForm.get('firstName')?.touched)">
-      <small
-        class="text-danger"
-        *ngIf="flightForm.get('firstName')?.hasError('required')"
-      >This field is required.</small>
-    </div>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Your last name</label>
-    <input
-      type="text"
-      class="form-control"
-      formControlName="lastName"
-    >
-    <div *ngIf="flightForm.get('lastName')?.invalid && (flightForm.get('lastName')?.dirty || flightForm.get('lastName')?.touched)">
-      <small
-        class="text-danger"
-        *ngIf="flightForm.get('lastName')?.hasError('required')"
-      >This field is required.</small>
-    </div>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Your email address</label>
-    <input
-      type="email"
-      class="form-control"
-      formControlName="email"
-    >
-    <div *ngIf="flightForm.get('email')?.invalid && (flightForm.get('email')?.dirty || flightForm.get('email')?.touched)">
-      <small
-        class="text-danger"
-        *ngIf="flightForm.get('email')?.hasError('required')"
-      >This field is required.</small>
-      <small
-          class="text-danger"
-          *ngIf="flightForm.get('email')?.hasError('email')"
-      >Please enter your email address.</small>
-    </div>
-  </div>
-  <div class="mb-3">
+<h2>Find your flight</h2>
+  <div class="mb-2">
     <label class="form-label">Choose departure city:</label>
     <select
       class="custom-select mb-3"
@@ -60,15 +15,15 @@
         {{ city.name }}
       </option>
     </select>
-    <div *ngIf="flightForm.get('departureCity')?.invalid && (flightForm.get('departureCity')?.dirty || flightForm.get('departureCity')?.touched)">
+    <div *ngIf="getFlightForm.get('departureCity')?.invalid && (getFlightForm.get('departureCity')?.dirty || getFlightForm.get('departureCity')?.touched)">
       <small
         class="text-danger"
-        *ngIf="flightForm.get('departureCity')?.hasError('required')"
+        *ngIf="getFlightForm.get('departureCity')?.hasError('required')"
       >This field is required.</small>
     </div>
   </div>
-  <div class="mb-3">
-    <label class="form-label">Choose departure city:</label>
+  <div class="mb-2">
+    <label class="form-label">Choose arrival city:</label>
     <select
       class="custom-select mb-3"
       formControlName="arrivalCity"
@@ -78,18 +33,117 @@
         {{ city.name }}
       </option>
     </select>
-    <div *ngIf="flightForm.get('arrivalCity')?.invalid && (flightForm.get('arrivalCity')?.dirty || flightForm.get('arrivalCity')?.touched)">
+    <div *ngIf="getFlightForm.get('arrivalCity')?.invalid && (getFlightForm.get('arrivalCity')?.dirty || getFlightForm.get('arrivalCity')?.touched)">
       <small
         class="text-danger"
-        *ngIf="flightForm.get('arrivalCity')?.hasError('required')"
+        *ngIf="getFlightForm.get('arrivalCity')?.hasError('required')"
+      >This field is required.</small>
+    </div>
+  </div>
+  <div class="mb-2">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="getFlightForm.invalid"
+    >Find Flights</button>
+  </div>
+</form>
+
+<form
+  class="container p-3s"
+  [formGroup]="bookForm"
+  (ngSubmit)="bookFlightForm()"
+>
+  <h2>Book your flight</h2>
+  <p>Fill out your personal information</p>
+  <div class="mb-3">
+    <label class="form-label">Your first name</label>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="firstName"
+    >
+    <div *ngIf="bookForm.get('firstName')?.invalid && (bookForm.get('firstName')?.dirty || bookForm.get('firstName')?.touched)">
+      <small
+        class="text-danger"
+        *ngIf="bookForm.get('firstName')?.hasError('required')"
       >This field is required.</small>
     </div>
   </div>
   <div class="mb-3">
+    <label class="form-label">Your last name</label>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="lastName"
+    >
+    <div *ngIf="bookForm.get('lastName')?.invalid && (bookForm.get('lastName')?.dirty || bookForm.get('lastName')?.touched)">
+      <small
+        class="text-danger"
+        *ngIf="bookForm.get('lastName')?.hasError('required')"
+      >This field is required.</small>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Your email address</label>
+    <input
+      type="email"
+      class="form-control"
+      formControlName="email"
+    >
+    <div *ngIf="bookForm.get('email')?.invalid && (bookForm.get('email')?.dirty || bookForm.get('email')?.touched)">
+      <small
+        class="text-danger"
+        *ngIf="bookForm.get('email')?.hasError('required')"
+      >This field is required.</small>
+      <small
+          class="text-danger"
+          *ngIf="bookForm.get('email')?.hasError('email')"
+      >Please enter your email address.</small>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <label class="form-label">Choose your flight by its number:</label>
+    <select
+      class="custom-select mb-3"
+      formControlName="flightId"
+    >
+      <option value="">Choose flight</option>
+      <option *ngFor="let flight of flights" [ngValue]="flight.id">
+        {{ flight.id }}
+      </option>
+    </select>
+    <div *ngIf="bookForm.get('flightId')?.invalid && (bookForm.get('flightId')?.dirty || bookForm.get('flightId')?.touched)">
+      <small
+        class="text-danger"
+        *ngIf="bookForm.get('flightId')?.hasError('required')"
+      >This field is required.</small>
+    </div>
+  </div>
+
+  <div class="mb-3">
     <button
       type="submit"
       class="btn btn-primary"
-      [disabled]="flightForm.invalid"
+      [disabled]="bookForm.invalid"
     >Confirm and Book</button>
   </div>
 </form>
+<h3>Select your flight</h3>
+<table class="table">
+  <thead>
+    <th scope="col">Flight number</th>
+    <th scope="col">Departure Time</th>
+    <th scope="col">Arrival Time</th>
+    <th scope="col">Seats Available</th>
+    <th scope="col">Price</th>
+  </thead>
+  <tr *ngFor="let flight of flights" scope="row">
+    <td>{{ flight.id }}</td>
+    <td>{{ flight.departureTime }}</td>
+    <td>{{ flight.arrivalTime }}</td>
+    <td>{{ flight.seatsAvailable }}</td>
+    <td>{{ flight.price }}</td>
+  </tr>
+</table>

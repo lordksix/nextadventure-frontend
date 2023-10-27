@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { FlightSearchModule } from './flight-search/flight-search.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { FlightSearchModule } from './flight-search/flight-search.module';
   imports: [
     BrowserModule,
     FormsModule,
-    FlightSearchModule
+    FlightSearchModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
