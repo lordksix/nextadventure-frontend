@@ -12,6 +12,8 @@ export class FlightSearchComponent implements OnInit {
   constructor(private flightsService: FlightService) { }
   cities : CityItem[] = [];
   flights : any[] = [];
+  bookingCompleted: boolean = false;
+  bookingMsg: string = '';
 
   ngOnInit(): void {
     this.flightsService.getCities().subscribe(
@@ -45,7 +47,7 @@ export class FlightSearchComponent implements OnInit {
             this.flights = data.data;
           },
           (error : any) => {
-            alert(error.message);
+            console.log(error.message);
           }
         );
       }
@@ -58,9 +60,10 @@ export class FlightSearchComponent implements OnInit {
       const { firstName, lastName, email, flightId } = this.bookForm.value;
       if(flightId && firstName && lastName && email) {
         const body = { firstName, lastName, email };
-        console.log(body);
         this.flightsService.bookFlight(flightId, body);
         this.getFlightsForm();
+        this.bookingCompleted = true
+        this.bookingMsg = `Boooking completed for flight #${flightId}`;
       }
     }
   }
