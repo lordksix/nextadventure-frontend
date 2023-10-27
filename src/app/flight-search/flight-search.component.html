@@ -1,53 +1,57 @@
-<form
-  class="container p-3"
-  [formGroup]="getFlightForm"
-  (ngSubmit)="$event.preventDefault(); getFlightsForm()"
->
-<h2>Find your flight</h2>
-  <div class="mb-2">
-    <label class="form-label">Choose departure city:</label>
-    <select
-      class="custom-select mb-3"
-      formControlName="departureCity"
-    >
-      <option value="">Choose city</option>
-      <option *ngFor="let city of cities" [ngValue]="city.id">
-        {{ city.name }}
-      </option>
-    </select>
-    <div *ngIf="getFlightForm.get('departureCity')?.invalid && (getFlightForm.get('departureCity')?.dirty || getFlightForm.get('departureCity')?.touched)">
-      <small
-        class="text-danger"
-        *ngIf="getFlightForm.get('departureCity')?.hasError('required')"
-      >This field is required.</small>
+<h1 class="text-center">Next Adventure Application</h1>
+<div class="container p-3">
+  <h2>Find your flight</h2>
+  <form
+    class="container p-3 d-flex justify-content-between align-items-cente"
+    [formGroup]="getFlightForm"
+    (ngSubmit)="$event.preventDefault(); getFlightsForm()"
+  >
+    <div class="mb-2">
+      <label class="form-label">Choose departure city:</label>
+      <select
+        class="custom-select mb-3"
+        formControlName="departureCity"
+      >
+        <option value="">Choose city</option>
+        <option *ngFor="let city of cities" [ngValue]="city.id">
+          {{ city.name }}
+        </option>
+      </select>
+      <div *ngIf="getFlightForm.get('departureCity')?.invalid && (getFlightForm.get('departureCity')?.dirty || getFlightForm.get('departureCity')?.touched)">
+        <small
+          class="text-danger"
+          *ngIf="getFlightForm.get('departureCity')?.hasError('required')"
+        >This field is required.</small>
+      </div>
     </div>
-  </div>
-  <div class="mb-2">
-    <label class="form-label">Choose arrival city:</label>
-    <select
-      class="custom-select mb-3"
-      formControlName="arrivalCity"
-    >
-      <option value="">Choose city</option>
-      <option *ngFor="let city of cities" [ngValue]="city.id">
-        {{ city.name }}
-      </option>
-    </select>
-    <div *ngIf="getFlightForm.get('arrivalCity')?.invalid && (getFlightForm.get('arrivalCity')?.dirty || getFlightForm.get('arrivalCity')?.touched)">
-      <small
-        class="text-danger"
-        *ngIf="getFlightForm.get('arrivalCity')?.hasError('required')"
-      >This field is required.</small>
+    <div class="mb-2">
+      <label class="form-label">Choose arrival city:</label>
+      <select
+        class="custom-select mb-3"
+        formControlName="arrivalCity"
+      >
+        <option value="">Choose city</option>
+        <option *ngFor="let city of cities" [ngValue]="city.id">
+          {{ city.name }}
+        </option>
+      </select>
+      <div *ngIf="getFlightForm.get('arrivalCity')?.invalid && (getFlightForm.get('arrivalCity')?.dirty || getFlightForm.get('arrivalCity')?.touched)">
+        <small
+          class="text-danger"
+          *ngIf="getFlightForm.get('arrivalCity')?.hasError('required')"
+        >This field is required.</small>
+      </div>
     </div>
-  </div>
-  <div class="mb-2">
-    <button
-      type="submit"
-      class="btn btn-primary"
-      [disabled]="getFlightForm.invalid"
-    >Find Flights</button>
-  </div>
-</form>
+    <div class="mb-2">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="getFlightForm.invalid"
+      >Find Flights</button>
+    </div>
+  </form>
+</div>
+
 
 <form
   class="container p-3s"
@@ -130,6 +134,11 @@
     >Confirm and Book</button>
   </div>
 </form>
+
+<h3 *ngIf="bookingCompleted" class="text-success">
+  {{ bookingMsg }}
+</h3>
+
 <h3>Select your flight</h3>
 <table class="table">
   <thead>

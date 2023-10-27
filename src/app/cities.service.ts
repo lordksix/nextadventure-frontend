@@ -39,14 +39,11 @@ export class FlightService {
     let options = this.getStandardOptions();
 
     const bookFlightsEndpoint = process.env['NEXTADVENTURE_API_ENDPOINT'] + '/flights/book/' + flightID +'/ds';
-    this.http.patch(bookFlightsEndpoint, body, options).subscribe(
+    return this.http.patch(bookFlightsEndpoint, body, options).subscribe(
       (val) => {
-          console.log("PATCH call successful value returned in body",
-                      val);
+          console.log("PATCH call successful value returned in body", val);
       },
-      response => {
-          console.log("PATCH call in error", response);
-      },
+      response => console.log(response),
       () => {
           console.log("The PATCH observable is now completed.");
       });
