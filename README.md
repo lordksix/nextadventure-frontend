@@ -121,7 +121,7 @@ cp .env.example .env
 
 ### Usage
 
-In the project directory, run:
+In the project directory, run the backend part of the application first then:
 
 ```sh
   ng serve
