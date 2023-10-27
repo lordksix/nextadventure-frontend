@@ -4,6 +4,52 @@
   (ngSubmit)="$event.preventDefault(); submitForm()"
 >
   <div class="mb-3">
+    <label class="form-label">Your first name</label>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="firstName"
+    >
+    <div *ngIf="flightForm.get('firstName')?.invalid && (flightForm.get('firstName')?.dirty || flightForm.get('firstName')?.touched)">
+      <small
+        class="text-danger"
+        *ngIf="flightForm.get('firstName')?.hasError('required')"
+      >This field is required.</small>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Your last name</label>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="lastName"
+    >
+    <div *ngIf="flightForm.get('lastName')?.invalid && (flightForm.get('lastName')?.dirty || flightForm.get('lastName')?.touched)">
+      <small
+        class="text-danger"
+        *ngIf="flightForm.get('lastName')?.hasError('required')"
+      >This field is required.</small>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Your email address</label>
+    <input
+      type="email"
+      class="form-control"
+      formControlName="email"
+    >
+    <div *ngIf="flightForm.get('email')?.invalid && (flightForm.get('email')?.dirty || flightForm.get('email')?.touched)">
+      <small
+        class="text-danger"
+        *ngIf="flightForm.get('email')?.hasError('required')"
+      >This field is required.</small>
+      <small
+          class="text-danger"
+          *ngIf="flightForm.get('email')?.hasError('email')"
+      >Please enter your email address.</small>
+    </div>
+  </div>
+  <div class="mb-3">
     <label class="form-label">Choose departure city:</label>
     <select
       class="custom-select mb-3"
@@ -14,10 +60,10 @@
         {{ city.name }}
       </option>
     </select>
-    <div *ngIf="flightForm.get('arrivalCity')?.invalid && (flightForm.get('arrivalCity')?.dirty || flightForm.get('arrivalCity')?.touched)">
+    <div *ngIf="flightForm.get('departureCity')?.invalid && (flightForm.get('departureCity')?.dirty || flightForm.get('departureCity')?.touched)">
       <small
         class="text-danger"
-        *ngIf="flightForm.get('arrivalCity')?.hasError('required')"
+        *ngIf="flightForm.get('departureCity')?.hasError('required')"
       >This field is required.</small>
     </div>
   </div>
@@ -40,10 +86,10 @@
     </div>
   </div>
   <div class="mb-3">
-      <button
-          type="submit"
-          class="btn btn-primary"
-          [disabled]="flightForm.invalid"
-      >Send Message</button>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="flightForm.invalid"
+    >Confirm and Book</button>
   </div>
 </form>

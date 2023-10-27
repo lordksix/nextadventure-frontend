@@ -22,6 +22,9 @@ export class FlightSearchComponent implements OnInit {
   flightForm = new FormGroup({
     departureCity: new FormControl('', Validators.required),
     arrivalCity: new FormControl('', Validators.required),
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
   });
 
   submitForm() {
