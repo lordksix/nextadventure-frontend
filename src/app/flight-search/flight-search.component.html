@@ -1,0 +1,49 @@
+<form
+  class="container p-5"
+  [formGroup]="flightForm"
+  (ngSubmit)="$event.preventDefault(); submitForm()"
+>
+  <div class="mb-3">
+    <label class="form-label">Choose departure city:</label>
+    <select
+      class="custom-select mb-3"
+      formControlName="departureCity"
+    >
+      <option value="">Choose city</option>
+      <option *ngFor="let city of cities" [ngValue]="city.id">
+        {{ city.name }}
+      </option>
+    </select>
+    <div *ngIf="flightForm.get('arrivalCity')?.invalid && (flightForm.get('arrivalCity')?.dirty || flightForm.get('arrivalCity')?.touched)">
+      <small
+        class="text-danger"
+        *ngIf="flightForm.get('arrivalCity')?.hasError('required')"
+      >This field is required.</small>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Choose departure city:</label>
+    <select
+      class="custom-select mb-3"
+      formControlName="arrivalCity"
+    >
+      <option value="">Choose city</option>
+      <option *ngFor="let city of cities" [ngValue]="city.id">
+        {{ city.name }}
+      </option>
+    </select>
+    <div *ngIf="flightForm.get('arrivalCity')?.invalid && (flightForm.get('arrivalCity')?.dirty || flightForm.get('arrivalCity')?.touched)">
+      <small
+        class="text-danger"
+        *ngIf="flightForm.get('arrivalCity')?.hasError('required')"
+      >This field is required.</small>
+    </div>
+  </div>
+  <div class="mb-3">
+      <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="flightForm.invalid"
+      >Send Message</button>
+  </div>
+</form>
